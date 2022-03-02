@@ -15,12 +15,14 @@ Created on Wed March 3 2022
 import numpy as np
 import pickle 
 import streamlit as st
-
+import pandas as pd
+from PIL import Image
 
 
 
 # loading the saved model
-loaded_model = pickle.load(open('E:/ML PROJECTS/ML/trained_model.sav', 'rb'))
+pickle_in = open("classifier.pkl","rb")
+classifier=pickle.load(pickle_in)
 
 
 def diabetes_prediction(input_data):
@@ -31,7 +33,7 @@ def diabetes_prediction(input_data):
     # reshape the array as we are predicting for one instance
     input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
 
-    prediction = loaded_model.predict(input_data_reshaped)
+    prediction = classifier.predict(input_data_reshaped)
     print(prediction)
 
     if (prediction[0] == 0):
